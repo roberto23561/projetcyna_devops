@@ -1,0 +1,2 @@
+[srv_dops]
+localhost ansible_connection=local

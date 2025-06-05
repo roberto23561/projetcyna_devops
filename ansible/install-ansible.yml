@@ -1,0 +1,14 @@
+---
+- name: Installer Ansible
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Mettre à jour les paquets
+      apt:
+        update_cache: yes
+
+    - name: Installer Ansible
+      apt:
+        name: ansible
+        state: present

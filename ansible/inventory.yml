@@ -1,0 +1,6 @@
+all:
+  hosts:
+    SRV-AUTO:
+      ansible_host: 172.19.20.153
+      ansible_user: sysadmin
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa

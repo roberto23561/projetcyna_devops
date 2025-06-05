@@ -1,0 +1,29 @@
+---
+- name: Installer Terraform
+  hosts: localhost
+  become: true
+
+  vars:
+    terraform_version: "1.8.2"
+
+  tasks:
+    - name: Télécharger Terraform
+      get_url:
+        url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+        dest: /tmp/terraform.zip
+
+    - name: Décompresser Terraform
+      unarchive:
+        src: /tmp/terraform.zip
+        dest: /usr/local/bin/
+        remote_src: yes
+        creates: /usr/local/bin/terraform
+
+    - name: Vérifier la version de Terraform
+      command: terraform version
+      register: terraform_version_output
+      changed_when: false
+
+    - name: Afficher la version installée
+      debug:
+        msg: "{{ terraform_version_output.stdout }}"

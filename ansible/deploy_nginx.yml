@@ -1,0 +1,13 @@
+---
+- name: Déployer nginx depuis registry local
+  hosts: srv_dops
+  tasks:
+    - name: Lancer le container nginx
+      community.docker.docker_container:
+        name: mynginx
+        image: 172.19.20.151:5000/nginx
+        state: started
+        ports:
+          - "8080:80"
+        volumes:
+          - /opt/nginx-html:/usr/share/nginx/html:ro
